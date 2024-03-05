@@ -18,7 +18,7 @@ public interface IDAO<T> {
 
     public List<T> buscarAll();
 
-    public T buscarById(int id);
+    public T buscarById(long id);
 
     public boolean eliminar(T p);
 

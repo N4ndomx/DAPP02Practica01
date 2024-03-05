@@ -14,9 +14,8 @@
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
     <property name="hbm2ddl.auto">none</property>
-    <mapping class="org.uv.dapp02practica01.PojoEmpleado" ></mapping>
-    <mapping class="org.uv.dapp02practica01.venta.Venta" ></mapping>
-    <mapping class="org.uv.dapp02practica01.venta.DetalleVenta" ></mapping>
+    <mapping class="org.uv.dapp02practica01.Venta" ></mapping>
+    <mapping class="org.uv.dapp02practica01.DetalleVenta" ></mapping>
 
   </session-factory>
 </hibernate-configuration>

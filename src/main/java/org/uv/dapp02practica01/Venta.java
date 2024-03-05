@@ -2,14 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.uv.dapp02practica01.venta;
+package org.uv.dapp02practica01;
 
+import org.uv.dapp02practica01.DetalleVenta;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,7 +43,7 @@ public class Venta {
     
     
     
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<DetalleVenta> detalleVenta;
      public Venta() {
         detalleVenta = new ArrayList<>();
