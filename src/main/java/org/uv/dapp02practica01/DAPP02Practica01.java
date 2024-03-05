@@ -7,6 +7,7 @@ import java.awt.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +16,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.uv.dapp02practica01.mensaje.IMensaje;
 import org.uv.dapp02practica01.mensaje.Saludo;
+import org.uv.dapp02practica01.venta.DetalleVenta;
+import org.uv.dapp02practica01.venta.Venta;
 
 /**
  *
@@ -34,12 +37,31 @@ public class DAPP02Practica01 {
 //        emp.setId(1);
 
 // get recupera directo de la base de datos y load lo carga de cache una ves que ya se recupera de bd
-        PojoEmpleado emp2 = session.get(PojoEmpleado.class, 1);
+//        PojoEmpleado emp2 = session.get(PojoEmpleado.class, 1);
 //        emp2.setNombre("albert");
 //        session.save(emp2);
-        session.delete(emp2);
-        tr.commit(); 
-        System.out.println("Hola y adios " + emp2.getNombre());
+//        session.delete(emp2);
+// ventas 
+        Venta v = new Venta();
+        v.setClienre("Kolaloca");
+        v.setTotal(8000.0d);
+        v.setFechaventa(new java.sql.Date(new Date().getTime()));
+//        session.save(v);
+//        tr.commit();
+        System.out.println("Hola y adios " + v.getClienre());
+        
+        for (int i = 0; i < 5; i++) {
+            DetalleVenta dtv = new DetalleVenta();
+            dtv.setPrecio(10);
+            dtv.setProducto("Produc"+(i+1));
+            dtv.setCantidad(10);
+            dtv.setVenta(v);
+            v.getDetalleVenta().add(dtv);
+//            session.save(dtv);
+        }
+        session.save(v);
+        
+        tr.commit();
 
     }
 //
