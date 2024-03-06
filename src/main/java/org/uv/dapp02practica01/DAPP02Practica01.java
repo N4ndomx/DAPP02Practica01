@@ -47,7 +47,6 @@ public class DAPP02Practica01 {
 
         IDAO<Venta> dao = new DAOVenta();
         Scanner scanner = new Scanner(System.in);
-        Venta pojoVenta = new Venta();
 
         int opcion;
         do {
@@ -65,6 +64,7 @@ public class DAPP02Practica01 {
 
             switch (opcion) {
                 case 1:
+                    Venta pojoVenta = new Venta();
                     System.out.print("Ingrese el  nombre del Cliente: ");
                     String cliente = scanner.nextLine();
                     System.out.print("Ingrese el  Total de la venta: ");
@@ -129,9 +129,10 @@ public class DAPP02Practica01 {
                     break;
 
                 case 3:
+                    Venta pojoVenta3 = new Venta();
                     System.out.print("Ingrese la Id de la venta a actualizar: ");
                     String idup = scanner.nextLine();
-                    pojoVenta.setId(Integer.parseInt(idup));
+                    pojoVenta3.setId(Integer.parseInt(idup));
 
                     // Obtener la venta existente para realizar la actualización
                     Venta ventaExistente = dao.buscarById(Long.parseLong(idup));
@@ -142,9 +143,9 @@ public class DAPP02Practica01 {
                         System.out.print("Ingrese el nuevo Total de la venta: ");
                         String nuevoTotal = scanner.nextLine();
 
-                        pojoVenta.setClienre(nuevoCliente);
-                        pojoVenta.setTotal(Double.parseDouble(nuevoTotal));
-                        pojoVenta.setFechaventa(pojoVenta.getFechaventa());
+                        pojoVenta3.setClienre(nuevoCliente);
+                        pojoVenta3.setTotal(Double.parseDouble(nuevoTotal));
+                        pojoVenta3.setFechaventa(ventaExistente.getFechaventa());
                         // Obtener los detalles de venta existentes
                         List<DetalleVenta> detallesActuales = ventaExistente.getDetalleVenta();
 
@@ -176,9 +177,9 @@ public class DAPP02Practica01 {
                             }
                         }
 
-                        pojoVenta.setDetalleVenta(detallesActuales);
+                        pojoVenta3.setDetalleVenta(detallesActuales);
 
-                        boolean ban = dao.modificar(pojoVenta);
+                        boolean ban = dao.modificar(pojoVenta3);
                         if (ban) {
                             System.out.print("Se Actualizó la Venta");
                         } else {
@@ -192,13 +193,18 @@ public class DAPP02Practica01 {
                 case 4:
                     System.out.print("Ingrese la Id del una venta ");
                     String id = scanner.nextLine();
-                    pojoVenta.setId(Integer.parseInt(id));
-                    if (!dao.eliminar(pojoVenta)) {
-                        System.out.print("No se logro Eliminar Empleado :");
-                    } else {
-                        System.out.print("Se Elimino Empleado ");
-                    }
 
+                    Venta ventaEliminar = dao.buscarById(Long.parseLong(id));
+
+                    if (ventaEliminar != null) {
+                        if (!dao.eliminar(ventaEliminar)) {
+                            System.out.print("No se logró eliminar la Venta.");
+                        } else {
+                            System.out.print("Se eliminó la Venta con éxito.");
+                        }
+                    } else {
+                        System.out.println("La venta con ID " + id + " no existe.");
+                    }
                     break;
 
                 case 5:
